@@ -13,13 +13,12 @@ const GAMES_TO_PLAY = 4;
  * Eftir leik er notanda boðið að spila annan leik, ef ekki hættir forrit.
  */
 function start() {
-  alert('Velkomin í leikinn. Svaraðu 10 dæmum á sem stysstum tíma.');
-  
-  do { 
-    play();
-  } while (confirm('Spila annan?'));
+  alert('Velkominn í leikinn. Markmiðið er að svara eins mörgum af 10 dæmum rétt eins hratt og mögulegt er. Um leið og ýtt er á OK þá fer tíminn af stað!')
 
-  alert(getResults);
+  do {
+    play();
+    //let timiStart = new Date();  veit ekki hvar ég á að staðsetja tímateljarann
+  } while (confirm('Spila annan?'));
 }
 
 /**
@@ -34,18 +33,18 @@ function start() {
  *
  */
 function play() {
-  const a = Math.floor(Math.random() * 10) + 1;
-  const b = Math.floor(Math.random() * 10) + 1;
-  const op = ["*", "+", "/", "-"][Math.floor(Math.random()*4)];
-  return prompt("Hver er útkoman á " + a + " " + op + " " + b + "?") == eval( a + op + b);
-}
-
+  
   const questions = [ask(), ask(), ask(), ask(), ask()],
-  total = questions.length;
+  
+  total = questions.length,
   correct = questions.filter(Boolean).length;
+  //let timeEnd = new Date(); veit ekki hvar ég á að staðsetja tímateljarann
+  //let heildarTimi = timi; veit ekki hvar ég á að staðsetja tímateljarann
+  alert("Þú svarðir "+correct+" rétt af "+total+". Það tók þig "+/*heildarTimi+*/" margar sekúndur");
 
-alert( "Þú svaraðir  "+correct+"/"+total+" correctly");
-}
+  }
+
+
 
 /**
  * Spyr einnar spurningar og skilar upplýsingum um svar (mögulega með því að
@@ -62,6 +61,22 @@ alert( "Þú svaraðir  "+correct+"/"+total+" correctly");
  * Sniðugt væri að færa það að búa til spurningu í nýtt fall sem ask() kallar í.
  */
 function ask() {
+  const op = ["*", "+", "/", "-"][Math.floor(Math.random()*4)];
+  const a = randomNumber(1, 100);
+  const b = randomNumber(1, 100);
+  /*const c = randomNumber(1, 10);
+  const d = randomNumber(2, 10);
+  if (op = "*") {
+    a = c;
+    b = c;
+  } else if (op = "/") {
+    a = d;
+    a = d * d;
+  } else {
+    a = a;
+    b = b;
+  } Þarf að finna út hvernig ég breyti randomnumber*/
+  return prompt("How much is " + a + " " + op + " " + b + "?") == eval( a + op + b);
 }
 
 /**
